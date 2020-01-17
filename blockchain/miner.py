@@ -20,11 +20,16 @@ def proof_of_work(last_proof):
     - Use the same method to generate SHA-256 hashes as the examples in class
     """
 
+    last_proof_string = str(last_proof).encode()
+    last_hash = hashlib.sha256(last_proof_string).hexdigest()
     start = timer()
 
     print("Searching for next proof")
-    proof = 0
+    proof = 1
+
     #  TODO: Your code here
+    while valid_proof(last_hash, proof) is False:
+        proof *= 2
 
     print("Proof found: " + str(proof) + " in " + str(timer() - start))
     return proof
@@ -40,7 +45,10 @@ def valid_proof(last_hash, proof):
     """
 
     # TODO: Your code here!
-    pass
+    proof_string = str(proof).encode()
+    new_hash = hashlib.sha256(proof_string).hexdigest()
+
+    return last_hash[-6:] == new_hash[:6]
 
 
 if __name__ == '__main__':
