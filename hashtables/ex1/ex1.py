@@ -23,7 +23,7 @@ def get_indices_of_item_weights(weights, length, limit):
             # Instantiate indices
             indices = []
 
-            for i in range(length):
+            for i in range(length): # O(n)
                 if weights[i] == weight:
                     indices.append(i)
                     
